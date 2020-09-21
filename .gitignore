@@ -1,0 +1,16 @@
+.idea/
+*.iml
+target/
+
+.classpath
+.project
+bin/
+.settings/
+
+# Gradle
+.gradle
+/build/
+
+
+# Project exclude paths
+/out/
