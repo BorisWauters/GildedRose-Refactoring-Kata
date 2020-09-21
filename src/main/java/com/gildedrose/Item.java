@@ -2,10 +2,13 @@ package com.gildedrose;
 
 public class Item {
 
+    // item name
     public String name;
 
+    // amount of days left to sell item
     public int sellIn;
 
+    // quality of the item
     public int quality;
 
     public Item(String name, int sellIn, int quality) {
