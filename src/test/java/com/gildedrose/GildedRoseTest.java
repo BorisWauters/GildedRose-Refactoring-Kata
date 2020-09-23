@@ -40,7 +40,6 @@ class GildedRoseTest {
     @Test
     void agedBrie() {
         // "Aged Brie" actually increases in Quality the older it gets
-
         int originalSellIn = 10;
         int originalQuality = 10;
 
@@ -111,5 +110,4 @@ class GildedRoseTest {
             assertEquals(targetQuality[i], app.items[i].quality, "Quality must be altered correctly");
         }
     }
-
 }
