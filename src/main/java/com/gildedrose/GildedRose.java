@@ -17,8 +17,7 @@ class GildedRose {
             item.sellIn--;
 
             // Update quality
-            int deltaQuality = getDeltaQuality(item);
-            item.quality += deltaQuality;
+            item.quality += deltaQuality(item);
 
             qualityBoundsCheck(item);
         }
@@ -35,8 +34,8 @@ class GildedRose {
         }
     }
 
-    private int getDeltaQuality(Item item) {
-
+    private int deltaQuality(Item item) {
+        // "Backstage passes" increases in Quality as its SellIn value approaches
         if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
             // Quality drops to 0 after the concert
             if (item.sellIn < 0)
@@ -57,12 +56,14 @@ class GildedRose {
         int deltaQuality = -1;
 
         // "Aged Brie" actually increases in Quality the older it gets
+        // todo: Is "Conjured Aged Brie" be something that should be accounted for?
         if (item.name.equals("Aged Brie")) {
             deltaQuality = 1;
         }
 
         // Once the sell by date has passed, Quality degrades twice as fast
-        if (item.sellIn < 0) {
+        // "Conjured" items degrade in Quality twice as fast as normal items
+        if (item.sellIn < 0 || item.name.contains("Conjured")) {
             deltaQuality *= 2;
         }
 

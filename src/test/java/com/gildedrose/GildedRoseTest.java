@@ -89,14 +89,14 @@ class GildedRoseTest {
     @Test
     void backstagePasses() {
         /*
-        * "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
-        * Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
-        * Quality drops to 0 after the concert
-        * */
+         * "Backstage passes", like aged brie, increases in Quality as its SellIn value approaches;
+         * Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but
+         * Quality drops to 0 after the concert
+         * */
         String name = "Backstage passes to a TAFKAL80ETC concert";
         int originalQuality = 10;
         int[] sellDates = new int[]{-1, 10, 5};
-        int[] targetQuality = new int[]{0, originalQuality+2, originalQuality+3};
+        int[] targetQuality = new int[]{0, originalQuality + 2, originalQuality + 3};
 
         Item[] items = new Item[]{
                 new Item(name, sellDates[0], originalQuality),
@@ -109,5 +109,18 @@ class GildedRoseTest {
         for (int i = 0; i < items.length; i++) {
             assertEquals(targetQuality[i], app.items[i].quality, "Quality must be altered correctly");
         }
+    }
+
+    @Test
+    void conjuredItems() {
+        // "Conjured" items degrade in Quality twice as fast as normal items
+        int originalSellIn = 10;
+        int originalQuality = 10;
+
+        Item[] items = new Item[]{new Item("Conjured Mana Cake", originalSellIn, originalQuality)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
+        assertEquals(originalQuality - 2, app.items[0].quality, "Quality of \"Conjured\" item should decrease twice as fast");
     }
 }
